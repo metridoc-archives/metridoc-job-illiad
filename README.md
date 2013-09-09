@@ -1,3 +1,3 @@
-Metridoc job to run illiad database scripts.  We are in the process of migrating over the job that currently resides
-in metridoc-illiad-grails (which also has not been migrated to git yet) to a more script / cli friendly environment
-with no dependency on grails.  Stay tuned
+This is the command line utility to ingest inlliad data into the metridoc repo.  First you will need the metridoc 
+command line utility to run it.  To install the command line utility in a bash environment, you can run:
+
