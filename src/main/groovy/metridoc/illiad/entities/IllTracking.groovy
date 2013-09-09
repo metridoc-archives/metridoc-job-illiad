@@ -52,8 +52,7 @@ class IllTracking {
         }
         def itemsToStore = []
         LoggerFactory.getLogger(IllTracking).info "migrating all borrowing data that is awaiting request processing"
-        List borrowingList = IllBorrowing.findAllByTransactionStatus(IllBorrowing.AWAITING_REQUEST_PROCESSING)
-        borrowingList.each { IllBorrowing borrowing ->
+        IllBorrowing.findAllByTransactionStatus(IllBorrowing.AWAITING_REQUEST_PROCESSING).each { IllBorrowing borrowing ->
             if (!alreadyProcessedTransactions.contains(borrowing.transactionNumber)) {
                 addItem(borrowing, itemsToStore)
             }
@@ -84,11 +83,7 @@ class IllTracking {
     static updateFromIllBorrowing_AwaitingCopyrightClearance() {
         LoggerFactory.getLogger(IllTracking).info "migrating all borrowing data that is awaiting copyright clearance"
         def itemsToStore = []
-
-        IllTracking.list()
-        IllBorrowing.list()
-        List borrowingList = IllBorrowing.findAllByTransactionStatus(IllBorrowing.AWAITING_REQUEST_PROCESSING)
-        borrowingList.each { IllBorrowing borrowing ->
+        IllBorrowing.findAllByTransactionStatus(IllBorrowing.AWAITING_COPYRIGHT_CLEARANCE).each { IllBorrowing borrowing ->
             addItem(borrowing, itemsToStore)
         }
         processBatch(itemsToStore)
