@@ -6,6 +6,7 @@ import metridoc.core.tools.CamelTool
 import metridoc.core.tools.RunnableTool
 import metridoc.illiad.entities.IllBorrowing
 import metridoc.illiad.entities.IllCache
+import metridoc.illiad.entities.IllFiscalStartMonth
 import metridoc.illiad.entities.IllGroup
 import metridoc.illiad.entities.IllLenderGroup
 import metridoc.illiad.entities.IllLenderInfo
@@ -94,7 +95,8 @@ class IlliadTool extends RunnableTool {
                     IllLocation,
                     IllReferenceNumber,
                     IllTransaction,
-                    IllUserInfo
+                    IllUserInfo,
+                    IllFiscalStartMonth
             )
 
             //this will ensure that we are using the same dataSource that gorm uses
