@@ -60,6 +60,21 @@ class DateUtil {
         }
     }
 
+    static boolean isValidMonth(String month) {
+        try {
+            Calendar."${month.toUpperCase()}"
+            return true
+        }
+        catch (Throwable ignored) {
+            return false
+        }
+    }
+
+    static void setMonth(String month) {
+        assert isValidMonth(month) : "$month is not a valid month"
+        FY_START_MONTH = Calendar."${month.toUpperCase()}"
+    }
+
     private static boolean datesNotNull(Date dateOne, Date dateTwo) {
         dateOne != null && dateTwo != null
     }
