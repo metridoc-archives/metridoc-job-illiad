@@ -21,7 +21,8 @@ To install a specific release, do
 
 
 ```bash
-no releases yet
+#replace the version number with the one you want
+mdoc install https://github.com/metridoc/metridoc-job-illiad/archive/v0.1.0.zip
 ```
 
 After you have installed the job run `mdoc list-jobs` to make sure it installed correctly and `mdoc help illiad` to get 
