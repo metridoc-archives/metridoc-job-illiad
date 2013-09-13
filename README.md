@@ -28,8 +28,8 @@ After you have installed the job run `mdoc list-jobs` and `mdoc help illiad` to 
 
 #### Setting up the DataSource
 
-The job needs to know where the Illiad and MetriDoc database is.  The recommended aproach is to store the information in 
-an external config file.  This can be done either use the `-config` flag or by putting everything into 
+The job needs to know where the Illiad and MetriDoc databases are.  The recommended aproach is to store the information 
+in an external config file.  This can be done either use the `-config` flag or by putting everything into 
 `~/.metridoc/MetridocConfig.groovy`.  If you are using the illiad 
 [view](https://github.com/metridoc/metridoc-grails-illiad), using the central `MetridocConfig.groovy` file might be
 the best approach so the two applications can share the connection parameters.  When editing the config file, the data 
