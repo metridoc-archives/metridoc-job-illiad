@@ -76,6 +76,10 @@ dataSource_from_illiad {
 }
 ```
 
+After you have created the data sources, you can run `mdoc illiad --preview` to see if you can connect to them.
+To run the job with its defaults, simply run `mdoc illiad`.  There are 2 flags you can add, `-startDate` and 
+`-fiscalMonth`.  
 
+**startDate** - 
 
 
