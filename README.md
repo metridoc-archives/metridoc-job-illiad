@@ -10,6 +10,13 @@ for more details on `mdoc`, please see the [wiki](https://github.com/metridoc/me
 
 #### Installation
 
+You can either install one of the [releases](https://github.com/metridoc/metridoc-job-illiad/releases), or install the
+code in its current state.  To install the code in its current form, do 
+
+```bash
+mdoc install 
+```
+
 
 
 
