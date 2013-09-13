@@ -8,7 +8,7 @@ curl -s https://raw.github.com/metridoc/metridoc-job-cli/master/src/etc/install-
 for more details on `mdoc`, please see the [wiki](https://github.com/metridoc/metridoc-wiki/wiki) or the
 `mdoc` [page](https://github.com/metridoc/metridoc-job-cli).
 
-#### Installation
+#### Installation and Running
 
 You can either install one of the [releases](https://github.com/metridoc/metridoc-job-illiad/releases), or install the
 code in its current state.  To install the code in its current form, do 
@@ -24,7 +24,8 @@ To install a specific release, do
 no releases yet
 ```
 
-After you have installed the job run `mdoc list-jobs` and `mdoc help illiad` to get usage.
+After you have installed the job run `mdoc list-jobs` to make sure it installed correctly and `mdoc help illiad` to get 
+usage info.
 
 #### Setting up the DataSource
 
@@ -80,6 +81,9 @@ After you have created the data sources, you can run `mdoc illiad --preview` to 
 To run the job with its defaults, simply run `mdoc illiad`.  There are 2 flags you can add, `-startDate` and 
 `-fiscalMonth`.  
 
-**startDate** - 
+**startDate** - The date the job should start at for migrating data.  By default, it is the first day of the first 
+fiscal month.
+
+**fiscalMonth** - The first month of the fiscal year, defaults to `July`
 
 
