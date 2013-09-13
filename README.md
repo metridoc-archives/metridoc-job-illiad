@@ -21,13 +21,57 @@ To install a specific release, do
 
 
 ```bash
-coming soon
+no releases yet
 ```
+
+After you have installed the job run `mdoc list-jobs` and `mdoc help illiad` to get usage.
 
 #### Setting up the DataSource
 
 The job needs to know where the Illiad and MetriDoc database is.  The recommended aproach is to store the information in 
-an external config file.
+an external config file.  This can be done either use the `-config` flag or by putting everything into 
+`~/.metridoc/MetridocConfig.groovy`.  When editing a config file, the data sources would look something like:
+
+```groovy
+dataSource {
+    pooled = true
+    dbCreate = "update"
+    url = "jdbc:mysql://localhost:3306/metridoc"
+    driverClassName = "com.mysql.jdbc.Driver"
+    dialect = MySQL5InnoDBDialect
+    password = "password"
+    username = "metridoc"
+    properties {
+        maxActive = -1
+        minEvictableIdleTimeMillis = 1800000
+        timeBetweenEvictionRunsMillis = 1800000
+        numTestsPerEvictionRun = 3
+        testOnBorrow = true
+        testWhileIdle = true
+        testOnReturn = true
+        validationQuery = "SELECT 1"
+    }
+}
+
+dataSource_from_illiad {
+    pooled = true
+    driverClassName = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+    dbCreate = "none"
+    username = "metridoc"
+    password = "password"
+    url = "jdbc:sqlserver://localhost:1433;databaseName=ILLData"
+    properties {
+        maxActive = -1
+        minEvictableIdleTimeMillis = 1800000
+        timeBetweenEvictionRunsMillis = 1800000
+        numTestsPerEvictionRun = 3
+        testOnBorrow = true
+        testWhileIdle = true
+        testOnReturn = true
+        validationQuery = "SELECT 1"
+    }
+}
+```
 
 
 
