@@ -81,9 +81,9 @@ After you have created the data sources, you can run `mdoc illiad --preview` to 
 To run the job with its defaults, simply run `mdoc illiad`.  There are 2 flags you can add, `-startDate` and 
 `-fiscalMonth`.  
 
-**startDate** - The date the job should start at for migrating data.  By default, it is the first day of the first 
+*startDate* - The date the job should start at for migrating data.  By default, it is the first day of the first 
 fiscal month.
 
-**fiscalMonth** - The first month of the fiscal year, defaults to `July`
+*fiscalMonth* - The first month of the fiscal year, defaults to `July`
 
 
