@@ -1,6 +1,6 @@
 
 ###############
-# Illiad Job #
+# Illiad Job  #
 ###############
 
 Usage: mdoc [mdoc options] illiad [options]
@@ -9,6 +9,7 @@ Options
 -------
 
   -startDate    the date to start at for collecting data, defaults to the
-                beginning of the current fiscal month
+                beginning of the current fiscal month, has the format
+                yyyyMMdd
 
   -fiscalMonth  the first month of the fiscal year, defaults to July
