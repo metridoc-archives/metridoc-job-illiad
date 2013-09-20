@@ -87,4 +87,29 @@ fiscal month.
 
 * *fiscalMonth* - The first month of the fiscal year, defaults to `July`
 
+Tables
+------
+
+To see a diagram of tables, go [here](https://github.com/metridoc/metridoc-job-illiad/blob/master/docs/illiadTables.png)
+
+Foreign keys have been avoided to simplify the ingestion process.  All illiad tables have the prefix `ill_`.  All tables
+use a surrogate key and also contain a `version` column in case any table is used with Gorm or Hibernate and needs
+optimistic locking (although this is very unlikely)
+
+Here is a list of tables along with a description:
+
+* *ill_transaction* - contains all transactional data at its current state, along with its biliogaphic information
+* *ill_cache* - contains reporting data in json format, which is used in the illiad grails 
+[plugin](http://github.com/metridoc/metridoc-grails-illiad)
+* *ill_borrowing* - contains all data for each step of a borrowing transaction
+* *ill_fiscal_month_start* - contains the fiscal month (typically July), used in the illiad grails 
+[plugin](http://github.com/metridoc/metridoc-grails-illiad).
+* *ill_group* - contains group information on borrowers and lenders
+* *ill_lender_info* - contains lender billing and address information by lender code
+* *ill_lender_group* - link table between `ill_group` and `ill_lender_info`
+* *ill_lending* - similar to `ill_borrowing`, but for lending
+* *ill_lending_tracking* - arrival and completion info for a lending transaction
+* *ill_reference_number* - reference numbers for a transaction, oclc, call numbers, etc.
+* *ill_tracking* - tracking data for borrowing
+* *ill_user_info* - user info, optional columns that can be filled by another process related to department and rank
 
