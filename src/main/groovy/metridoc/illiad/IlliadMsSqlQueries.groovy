@@ -67,6 +67,8 @@ class IlliadMsSqlQueries {
                 "from ${userTableName} where UserName in (select UserName from Transactions)"
     }
 
+
+    //TODO: All queries from here and below are actually MySql queries.  Should migrate to the MySql class
     def orderDateSqlStmt = "update ill_tracking t set order_date = " +
             " (select transaction_date from ill_borrowing l where l.transaction_number = t.transaction_number and " +
             " transaction_status = 'Request Sent') where order_date is null"
@@ -91,6 +93,11 @@ class IlliadMsSqlQueries {
             " set completion_date = transaction_date, completion_status = status " +
             " where l.transaction_number = t.transaction_number and status " +
             " not in ('Awaiting Lending Request Processing','Cancelled by ILL Staff')"
+
+    //makes sure that any shipped Loan takes precedence over any other completion time, should be run after [completionSqlStmt]
+    def shipSqlStmt = "update ill_lending_tracking t, ill_lending l " +
+            " set completion_date = transaction_date, completion_status = status " +
+            " where l.transaction_number = t.transaction_number and status = 'Item Shipped'"
 
     def cancelledSqlStmt = "update ill_lending_tracking t, ill_lending l " +
             " set completion_date = transaction_date, completion_status = status " +
