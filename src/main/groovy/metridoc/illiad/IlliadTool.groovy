@@ -159,6 +159,7 @@ class IlliadTool extends RunnableTool {
             [
                     fromIlliadSqlStatements.arrivalDateSqlStmt,
                     fromIlliadSqlStatements.completionSqlStmt,
+                    fromIlliadSqlStatements.shipSqlStmt,
                     fromIlliadSqlStatements.cancelledSqlStmt
             ].each {
                 log.info "updating lending with sql statement $it"
