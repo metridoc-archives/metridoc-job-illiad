@@ -5,8 +5,6 @@ import groovy.util.logging.Slf4j
 import metridoc.illiad.entities.IllCache
 import metridoc.illiad.entities.IllGroup
 
-import javax.sql.DataSource
-
 /**
  * Created with IntelliJ IDEA on 9/7/13
  * @author Tommy Barker
@@ -14,7 +12,7 @@ import javax.sql.DataSource
 @Slf4j
 class IlliadHelper {
 
-    IlliadTool illiadTool
+    IlliadService illiadTool
 
     static final int GROUP_ID_OTHER = -2
     static final int GROUP_ID_TOTAL = -1

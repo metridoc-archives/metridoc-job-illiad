@@ -4,20 +4,11 @@ import groovy.sql.Sql
 import groovy.util.logging.Slf4j
 import metridoc.core.tools.CamelTool
 import metridoc.core.tools.RunnableTool
-import metridoc.illiad.entities.IllBorrowing
-import metridoc.illiad.entities.IllCache
-import metridoc.illiad.entities.IllFiscalStartMonth
 import metridoc.illiad.entities.IllGroup
 import metridoc.illiad.entities.IllLenderGroup
-import metridoc.illiad.entities.IllLenderInfo
-import metridoc.illiad.entities.IllLending
 import metridoc.illiad.entities.IllLendingTracking
-import metridoc.illiad.entities.IllLocation
-import metridoc.illiad.entities.IllReferenceNumber
 import metridoc.illiad.entities.IllTracking
-import metridoc.illiad.entities.IllTransaction
-import metridoc.illiad.entities.IllUserInfo
-import metridoc.tool.gorm.GormTool
+import metridoc.service.gorm.GormService
 import metridoc.utils.DataSourceConfigUtil
 
 import javax.sql.DataSource
@@ -30,12 +21,13 @@ import java.text.SimpleDateFormat
  * @author Tommy Barker
  */
 @Slf4j
-class IlliadTool extends RunnableTool {
+class IlliadService extends RunnableTool {
 
     Sql sql
     Sql fromIlliadSql
     DataSource dataSource
     DataSource dataSource_from_illiad
+    GormService gormService
 
     def fromIlliadSqlStatements = new IlliadMsSqlQueries()
     def toIlliadSqlStatements = new IlliadMysqlQueries()
@@ -81,26 +73,8 @@ class IlliadTool extends RunnableTool {
         }
 
         target(initializeDb: "initializing Gorm objects, db, etc.") {
-            def gormTool = includeTool(GormTool)
-
-            gormTool.enableGormFor(
-                    IllGroup,
-                    IllBorrowing,
-                    IllTracking,
-                    IllCache,
-                    IllLenderGroup,
-                    IllLenderInfo,
-                    IllLending,
-                    IllLendingTracking,
-                    IllLocation,
-                    IllReferenceNumber,
-                    IllTransaction,
-                    IllUserInfo,
-                    IllFiscalStartMonth
-            )
-
             //this will ensure that we are using the same dataSource that gorm uses
-            dataSource = gormTool.applicationContext.getBean(DataSource)
+            dataSource = gormService.applicationContext.getBean(DataSource)
             dataSource_from_illiad = DataSourceConfigUtil.getDataSource(binding.config, "dataSource_from_illiad")
             fromIlliadSql = new Sql(dataSource_from_illiad)
         }

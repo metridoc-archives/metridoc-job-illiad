@@ -1,49 +1,64 @@
-import metridoc.core.MetridocScript
+import metridoc.core.services.ConfigService
 import metridoc.core.tools.ConfigTool
-import metridoc.core.tools.ParseArgsTool
 import metridoc.illiad.DateUtil
-import metridoc.illiad.IlliadTool
-import metridoc.illiad.entities.IllFiscalStartMonth
+import metridoc.illiad.IlliadService
+import metridoc.illiad.entities.*
+import metridoc.service.gorm.GormService
 import metridoc.utils.DataSourceConfigUtil
 
-use(MetridocScript) {
-    //populate argsMap with cli info
-    includeTool(ParseArgsTool)
+import javax.sql.DataSource
 
-    if(argsMap.containsKey("preview")) {
-        doPreview()
-        return
-    }
+//populate argsMap with cli info
+includeService(ConfigService)
 
-    def month = "july"
-    if(argsMap.containsKey("fiscalMonth")) {
-        month = argsMap.fiscalMonth
-        DateUtil.setMonth(month)
-    }
+def gormService = includeService(GormService)
+gormService.enableGormFor(
+        IllGroup,
+        IllBorrowing,
+        IllTracking,
+        IllCache,
+        IllLenderGroup,
+        IllLenderInfo,
+        IllLending,
+        IllLendingTracking,
+        IllLocation,
+        IllReferenceNumber,
+        IllTransaction,
+        IllUserInfo,
+        IllFiscalStartMonth
+)
 
-    includeTool(IlliadTool).execute()
-    IllFiscalStartMonth.updateMonth(month)
+if (argsMap.containsKey("preview")) {
+    gormService.applicationContext.getBean("dataSource", DataSource).getConnection()
+    println "connected successfully to dataSource"
+    doPreview()
+    return
 }
 
+def month = "july"
+if (argsMap.containsKey("fiscalMonth")) {
+    month = argsMap.fiscalMonth
+    DateUtil.setMonth(month)
+}
+
+includeTool(IlliadService).execute()
+IllFiscalStartMonth.updateMonth(month)
+
 def doPreview() {
-    doConnect("dataSource")
     doConnect("dataSource_from_illiad")
 }
 
 def doConnect(String name) {
-    use(MetridocScript) {
-        //creates and binds config
-        includeTool(ConfigTool)
-    }
-
+    includeService(ConfigTool)
+    println config
     def dataSource = DataSourceConfigUtil.getDataSource(config, name)
 
     try {
         dataSource.getConnection()
         println "INFO - Connected successfully to $name"
     }
-    catch(Throwable throwable) {
-        println "ERROR - Could not connect to $name"
+    catch (Throwable throwable) {
+        println "ERROR - Could not connect to [$name]"
         throw throwable
     }
 }

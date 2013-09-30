@@ -1,7 +1,24 @@
 apply plugin: "groovy"
+project.version = "0.1"
+project.group = "com.github.metridoc"
+archivesBaseName = "metridoc-job-illiad"
+apply plugin: "metridoc"
+
+buildscript {
+    repositories {
+        maven {
+            url = "http://dl.bintray.com/upennlib/metridoc"
+        }
+    }
+
+    dependencies {
+        classpath "com.github.metridoc:metridoc-gradle-plugin:0.2.10"
+    }
+}
 
 repositories {
     mavenCentral()
+    mavenLocal()
     maven {
         url "http://jcenter.bintray.com/"
     }
@@ -12,15 +29,8 @@ repositories {
 
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.0.8',
+            'com.github.metridoc:metridoc-tool-gorm:0.4.2'
+
+    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0',
             'org.slf4j:slf4j-simple:1.7.5'
-
-    compile('com.github.metridoc:metridoc-tool-gorm:0.2.3') {
-        exclude module: "xml-apis"
-    }
-
-    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '1.7'
 }
