@@ -19,7 +19,7 @@ class IllTrackingTests {
 
     @Before
     void "load gorm objects"() {
-        def gorm = new GormTool(embeddedDataSource: true, mergeMetridocConfig: false)
+        def gorm = new GormTool(embeddedDataSource: true)
         gorm.init()
         gorm.enableGormFor(IllTracking, IllBorrowing)
     }
